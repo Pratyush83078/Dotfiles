@@ -1,0 +1,29 @@
+ctrl + b +
+[ vim mode (g to top )
+% verticle split
+" horizontal
+o ,x to switch between pane and kill pane
+
+c,& new window and kill window
+0 1 2 n,p(prev),l(;last) to move through them 
+(,),L to switch between session
+:new to open new session
+, to rename it
+
+d to detach
+? to help 
+tmux ls 
+tmux attach -t <target_name> 
+tmux rename-session -t 0 <name>
+tmux new -s <session_name>
+tmux kill-session -t <session_name>
+ctrl + c to exit top window ( any overlay / func) etc 
+session preserved until the system reboot
+
+## Advanced ones
+
+  - $ rename current session
+  - t clock
+  - w select window from menu
+  - s select session from menu  
+

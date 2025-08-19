@@ -1,0 +1,18 @@
+C-
+/ undo
+u,k delete before and after cursor
+w,y cut and paste
+a,e begin,  end
+b,f back and forth
+n,p
+d
+h backspace
+d logout
+z to suspend
+r to search
+
+M- (alt)
+b,f
+d delete after cursor
+
+

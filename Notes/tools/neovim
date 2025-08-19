@@ -1,0 +1,146 @@
+vim-maximizer, oilnvim
+
+
+ + motion 
+command count motion 
+1. COMMAND : d c y v
+2. count : number any 1,2,3 etc 
+3. motion: hjkl w(ord) W  e(nd)  b(ackward) ge (go back word's end)
+
+4. normal mode : ctrl+c , Esc, ctrl+[
+5. yanking and deleting goes to same buffer ie whatever gets deleted(in normal mode) it goes to same buffer means it gets copied;
+
+  1. _ 0 $   d$
+2. f F t T  , ;  dt<letter> 
+3. o O A I 
+HJKL , gJ
+gUiw to uppercase
+ctrl+d ctrl+u (also work in insert mode very useful) and relative jump 
+
+
+1. { } preferred <C-d>zz ie nnoremap("<C-d>","<C-d>zz");
+2. :line_nmber
+3. / ? n N (nzzzv to center also) 
+4. :h rtp or netrw etc etc to help 
+there are three word in this asdfAAAff'''';;;;;----@@@$$$$&&&_____ see :h word a word is sequences of letters(digit) or underscore or punctuation marks or blank etc
+2x same as 2dl
+
+5. ciw ciW diw  ci' vi<anywordtoselectuptoall> etc etc 
+6. * (jump to repeated word use n N etc ) #
+
+---------ADV -1 --------
+1. vi ( vi{  va( v can be replaced with y d etc viw(imp) viW vib vie 
+     
+     <hello my name is prem> <hello my name is prem> not  ok gotta it got pasted in buffer or 
+2. use Vy Vd etc aviod dbl tap as it is way faster D Y
+
+
+-------ADV -2----------
+1. % to back and forth with brackets vi%
+2. use vi{ or va{ or da{ etc to select(delete) inside all paranthesis
+function ({ 
+})  
+3. = to format use =ap inside a paragraph to format a paragraph 
+const idea= newIdea({
+    ...idea
+})
+4. to delete a function use inside the function , va)Vd 
+5. o to jump back forth in visual seleted mode
+6. dip dap yap vap etc to do operation on paragraph ie up to newline up and down
+7. > (over) indenting  ie >j >5k >l
+8. ctrl + a to increment
+   ctrl + x to decrement
+9. ctrl + v v V 
+10. ctrl + o to redo jumping movement and ctrl + i to forward 
+    ctrl + ^ to switch between buffers (:ls ") etc
+11. va[ esc % 
+
+
+packerSync
+rosepine theme
+treesitter and its playground
+harpoon
+undotree
+vim-fugitive for git 
+
+
+gv to select recent visual seleted 
+g? to cipher and uncipher it (caeser cipher)
+M to go to middle
+:s/<word>/<changeto>/g    (globally)
+  g& to make it for all word in file
+:se virtualedit=all to move in air
+gm to move in center horizontally
+type qw that will register macro in register w (different clipboard in vim called register(36)) q to stop 
+  type @ and register key (w) to run recording 1 time type 20@w for 20 times  
+.(period to repeat again)
+
+# IN INSERT MODE
+ctrl+o in insert mode to use vim normanl command one time
+Ctrl + R	Insert content from register
+Ctrl + T	Indent line (shift right)
+Ctrl + D	De-indent line (shift left)
+" to go to register in normal mode
+  can be recover older one like "2p
+  " this tell that we want to use specific one (register) not default one ie. "ayw save word under cursor to a register , without "a (only yw) copyied text goto default register
+
+# Window
+ctrl + w + 
+         T(gt), s,v,c,  ^(to split horizontally alternate file ),ctrl+^(to switch between), 
+          hjkl,HJKL,<>-+, _(to get maximum top window size),o(open only in buffer)
+	  = to make all equal
+z <num> to fix (top window size)
+
+:m <num> (to move)
+:cop <num> (copy and move)
+:dis (to look up register)
+hello world
+hello world
+alt + b , alt + w; back and forward word in insert mode
+ctrl+o,i jumplist
+K,gd (see defintion on hower, go to definition)
+ctrl+t(built in for tag stack) (get back from where you press gd) 
+ctrl+q(quick fix list)
+sudo -E nvim ( -E tag to preserve it's environment)
+
+:norm (visually select line then you can perform any vim command by writing in normal mode for all line (sometimes better than recording) 
+ctrl+x+o
+m<key> , `<key> to mark and go
+:earlier 5m (back state of buffer (5min ago))
+:dig (special symbols)
+	ctrl+k+key(in :dig) (in insert mode) ♡ 
+--vim.api.nvim_create_user_command("anyname",function() 
+--  local filepath = vim.fn.expand("%:p")
+--	vim.fn.jobstart({ "biome", "format", "--write", filepath }, {
+--        on_exit = function()
+--            vim.cmd("edit!") -- reload file after formatting
+--        end,
+--				})
+--	end
+
+## TREESITTER
+	- :InspectTree and press o , :Inspect 
+
+## nvim-lspconfig
+	- data only repo , tells where the server are , when to start them and some extra config
+	- nvim has built in lsp (client (editor))
+	- it needs to talk to server (lsp-server like lua_ls for lua )
+
+:echo executables("binary Name") if 1 means neovim has founded
+
+-ctrl + ] go to tag , ctrl +t go back
+- grr for references (where is something used), grn rename, gra (codeaction) 
+- vim.diagnostic.setqflist()
+- =g format 
+- read h lsp
+
+# Quick fix list
+- :copen, cclose, cnext, cprev,(grr) 
+- :cdo (execute a command) eg, cdo s/client/c/gc (gc=global ,checks each one)
+- setqflist,vim.diagnostic.setqflist()
+
+# terminal
+- :term 
+
+#comment.nvim
+- gb multiline , gc single line

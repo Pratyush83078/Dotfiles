@@ -1,0 +1,28 @@
+echo 1 | sudo tee /sys/bus/pci/devices/0000:01:00.0/remove
+lspci | grep AMD
+sudo nano /etc/modprobe.d/disable-radeon.conf
+
+/etc/security/faillock.conf
+
+kew,fum : tui musicc players
+yazi, lf : tui file manager
+bleachbit,stacer: system cleaner (manager)
+timeshift,rsync,stp: for backing up and moving files  etc
+preload:less benefit on faster ssd(nvme) or on low ram device;
+top,htop,bpytop
+kotatogram , 64gram
+cowsay,nwg-looks
+whatis,
+norg, obsidian(md files helps in git)
+biome(formatter+linter for js,ts,json etc)
+ttyper,smash,typer(go)
+luakit, solaar
+
+pacman -Sc --remove all cashed files (-Scc use with caution)
+pacman -Qtdq --list orphaned packages
+pacman -Rns $(pacman -Qtdq)
+about pacman https://claude.ai/share/49010ae3-02d9-48a8-b163-9544ee2d205c
+sudo fc-cache -fv , fc-list, fc-list : family | sort | uniq | grep -i sf
+set -x ;#debug tool like 
+regex, find
+
