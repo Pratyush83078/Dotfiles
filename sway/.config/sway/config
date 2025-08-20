@@ -16,7 +16,7 @@ output * bg ~/Pictures/EyesOnCrack/wallpapers/beach.jpg fill
 output eDP-1 mode 1366x768@48.017Hz
 #output * allow_tearing yes
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-bindsym $mod+m output "HDMI-A-2" toggle ; output "eDP-1" toggle
+# bindsym $mod+m output "HDMI-A-2" toggle ; output "eDP-1" toggle
 
 exec swayidle -w \
      timeout 300 ' brightnessctl -s set 3%'\
@@ -140,6 +140,45 @@ bar {
         inactive_workspace #11113466 #242233ef #ffffff
     }
 }
+
+mode Mouse {
+
+  bindsym f mode default, exec 'wl-kbptr-sway-active-win;swaymsg mode Mouse;
+  bindsym Shift+f mode default, exec 'wl-kbptr;swaymsg mode Mouse;
+
+# Mouse move
+    bindsym h seat seat0 cursor move -15 0
+    bindsym j seat seat0 cursor move 0 15
+    bindsym k seat seat0 cursor move 0 -15
+    bindsym l seat seat0 cursor move 15 0
+
+# Left button
+    bindsym Return seat seat0 cursor press button1
+    bindsym --release Return seat seat0 cursor release button1
+
+# Middle button
+    bindsym Space  seat seat0 cursor press button2
+    bindsym --release Space seat seat0 cursor release button2
+
+# Right button
+    bindsym r seat seat0 cursor press button3
+    bindsym --release r seat seat0 cursor release button3
+
+    bindsym Shift+h seat seat0 cursor move -80 0
+    bindsym Shift+j seat seat0 cursor move 0 80
+    bindsym Shift+k seat seat0 cursor move 0 -80
+    bindsym Shift+l seat seat0 cursor move 80 0
+
+    bindsym u seat seat0 cursor scroll 0 -40   # scroll up
+    bindsym d seat seat0 cursor scroll 0 40    # scroll down
+
+    bindsym ctrl+c mode default, bar mode hide
+}
+
+bindsym $mod+shift+m exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
+bindsym $mod+m mode Mouse , bar mode dock
+seat seat0 hide_cursor 2000
+
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #222222 #3A3530 #eceff4 #481305   #491305
