@@ -17,6 +17,7 @@ norg, obsidian(md files helps in git)
 biome(formatter+linter for js,ts,json etc)
 ttyper,smash,typer(go)
 luakit, solaar
+wlrctl , ydtools, wl-kbptr (⚡ ~ ❯ sudo ydotoold -p /run/user/1000/.ydotool_socket -P 0666 &    
 
 pacman -Sc --remove all cashed files (-Scc use with caution)
 pacman -Qtdq --list orphaned packages
