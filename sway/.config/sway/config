@@ -142,41 +142,40 @@ bar {
 }
 
 mode Mouse {
+    bindsym f mode default, exec 'wl-kbptr-sway-active-win; swaymsg mode Mouse'
+    bindsym Shift+f mode default, exec 'wl-kbptr; swaymsg mode Mouse'
 
-  bindsym f mode default, exec 'wl-kbptr-sway-active-win;swaymsg mode Mouse;
-  bindsym Shift+f mode default, exec 'wl-kbptr;swaymsg mode Mouse;
-
-# Mouse move
+    # Mouse move (Vim-like)
     bindsym h seat seat0 cursor move -15 0
     bindsym j seat seat0 cursor move 0 15
     bindsym k seat seat0 cursor move 0 -15
     bindsym l seat seat0 cursor move 15 0
 
-# Left button
+    # Fast jumps
+    bindsym shift+k seat seat0 cursor move 0 -100
+    bindsym shift+j seat seat0 cursor move 0 100
+    bindsym shift+h seat seat0 cursor move -100 0
+    bindsym shift+l seat seat0 cursor move 100 0
+
+    # Left / middle / right click
     bindsym Return seat seat0 cursor press button1
     bindsym --release Return seat seat0 cursor release button1
 
-# Middle button
-    bindsym Space  seat seat0 cursor press button2
+    bindsym Space seat seat0 cursor press button2
     bindsym --release Space seat seat0 cursor release button2
 
-# Right button
     bindsym r seat seat0 cursor press button3
     bindsym --release r seat seat0 cursor release button3
 
-    bindsym Shift+h seat seat0 cursor move -80 0
-    bindsym Shift+j seat seat0 cursor move 0 80
-    bindsym Shift+k seat seat0 cursor move 0 -80
-    bindsym Shift+l seat seat0 cursor move 80 0
+    bindsym u exec wlrctl pointer scroll -50
+    bindsym d exec wlrctl pointer scroll 50
 
-    bindsym u seat seat0 cursor scroll 0 -40   # scroll up
-    bindsym d seat seat0 cursor scroll 0 40    # scroll down
-
-    bindsym ctrl+c mode default, bar mode hide
+    bindsym ctrl+c mode default, exec "swaymsg bar bar-0 mode hide"
 }
 
-bindsym $mod+shift+m exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
-bindsym $mod+m mode Mouse , bar mode dock
+bindsym $mod+m mode Mouse, exec "swaymsg bar bar-0 mode dock"
+bindsym $mod+Shift+m exec wl-kbptr-sway-active-win -o modes=floating,click -o mode_floating.source=detect
+
 seat seat0 hide_cursor 2000
 
 
