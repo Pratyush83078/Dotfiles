@@ -174,7 +174,7 @@ mode Mouse {
 }
 
 bindsym $mod+m mode Mouse, exec "swaymsg bar bar-0 mode dock"
-bindsym $mod+Shift+m exec wl-kbptr-sway-active-win -o modes=floating,click -o mode_floating.source=detect
+bindsym $mod+shift+m exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
 
 seat seat0 hide_cursor 2000
 
@@ -207,8 +207,18 @@ bindsym $mod+Tab workspace back_and_forth
 
 #assign [app_id="foot"] workspace number 2
 for_window [app_id="thorium-browser"] move container to workspace 1; workspace 1
-for_window [app_id="foot"] move container to workspace 2 ; workspace 2
+for_window [app_id="foot" instance="foot"] move container to workspace 2 ; workspace 2
 for_window [app_id="mpv"] move container to workspace 3; workspace 3
 
+# Popup Foot → floating, centered, transparent, NO BLUR
+for_window [app_id="foot-popup"] \
+    floating enable, \
+    move position 660px 300px, \
+    resize set 700 500, \
+    blur disable, \
+    opacity 0.6, 
+    # move container to workspace 3 ; workspace 3
+
+bindsym $mod+Shift+return exec sh -lc 'foot --app-id=foot-popup  tmux new-session -A -s popup'
 
 include /etc/sway/config.d/*foot

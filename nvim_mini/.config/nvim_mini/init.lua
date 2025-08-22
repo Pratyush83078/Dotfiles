@@ -39,23 +39,23 @@ vim.opt.pumheight = 10
 -- vim.opt.more = false
 
 vim.pack.add({
-	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-	{ src = "https://github.com/craftzdog/solarized-osaka.nvim" },
-	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/numToStr/Comment.nvim" },
-	{
-		src = "https://github.com/saghen/blink.cmp",
-		fuzzy = { implementation = "prefer_rust_with_warning" },
-	},
-	{ src = "https://github.com/rafamadriz/friendly-snippets" },
-	{ src = "https://github.com/L3MON4D3/LuaSnip" },
-	{ src = "https://github.com/ibhagwan/fzf-lua" },
-	{ src = "https://github.com/windwp/nvim-autopairs" },
-	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-	-- { src = "https://github.com/OXY2DEV/markview.nvim" },
+  { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+  { src = "https://github.com/craftzdog/solarized-osaka.nvim" },
+  -- { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/numToStr/Comment.nvim" },
+  {
+    src = "https://github.com/saghen/blink.cmp",
+    fuzzy = { implementation = "prefer_rust_with_warning" },
+  },
+  { src = "https://github.com/rafamadriz/friendly-snippets" },
+  { src = "https://github.com/L3MON4D3/LuaSnip" },
+  { src = "https://github.com/ibhagwan/fzf-lua" },
+  { src = "https://github.com/windwp/nvim-autopairs" },
+  { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+  -- { src = "https://github.com/OXY2DEV/markview.nvim" },
 })
 
 require("nvim-autopairs").setup()
@@ -68,8 +68,8 @@ require("mason-lspconfig").setup()
 vim.lsp.enable({ "lua_ls", "jdtls", "tsserver", "render-markdown" })
 
 vim.diagnostic.config({
-	virtual_lines = true,
-	signs = true,
+  virtual_lines = true,
+  signs = true,
 })
 
 -- local capabilities = require('blink.cmp').get_lsp_capabilities()
@@ -80,6 +80,31 @@ vim.diagnostic.config({
 -- lspconfig.ts_ls.setup({
 --   capabilities = capabilities
 -- })
+
+local term_win = nil
+local term_buf = nil
+
+function ToggleTerm()
+  if term_win and vim.api.nvim_win_is_valid(term_win) then
+    -- Hide window
+    vim.api.nvim_win_hide(term_win)
+    term_win = nil
+  else
+    if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
+      -- Reopen existing buffer in a new window
+      vim.cmd("botright split")
+      vim.api.nvim_win_set_height(0, 10)
+      vim.api.nvim_win_set_buf(0, term_buf)
+      term_win = vim.api.nvim_get_current_win()
+    else
+      -- Create new terminal buffer
+      vim.cmd("botright 10split | term")
+      term_win = vim.api.nvim_get_current_win()
+      term_buf = vim.api.nvim_get_current_buf()
+    end
+    vim.cmd("startinsert")
+  end
+end
 
 -- KEYMAPS FOR NEOVIM
 local map = vim.keymap.set
@@ -93,55 +118,64 @@ map("n", "N", "Nzzzv")
 map({ "n", "v", "x" }, "<localleader><localleader>", '"+')
 map("n", "<leader>lf", vim.lsp.buf.format)
 map("i", "<C-c>", "<Esc>")
-map("n", "<localleader>t", function()
-	vim.cmd.new()
-	vim.cmd.wincmd("J") --<c-w>J
-	vim.cmd.term()
-	vim.api.nvim_win_set_height(0, 6)
+map("t", "<C-[>", "<C-\\><C-n>")
+map("n", "<localleader>v", "<cmd>e ~/.config/nvim_mini/init.lua<CR>")
+vim.keymap.set("n", "<localleader>v",
+function ()
+ vim.cmd((vim.fn.expand("%:p") == vim.fn.expand("~/.config/nvim_mini/init.lua"))
+    and "edit #"
+    or "edit ~/.config/nvim_mini/init.lua")
 end)
+map({ "n", "t", "i" }, "<localleader>t", ToggleTerm, { noremap = true, silent = true })
 map("n", "<localleader>d", ":lua vim.diagnostic.setqflist()<CR>:q<CR>")
-
-vim.cmd([[ hi @function.builtin guifg = yellow ]])
 map({ "i" }, "jk", "<C-[>l")
 
+
+vim.cmd([[ hi @function.builtin guifg = yellow ]])
 vim.cmd("colorscheme solarized-osaka")
 vim.cmd(":hi statusline guibg=#111101") -- cmd used for vimscript/Ex commands
 vim.api.nvim_set_hl(0, "Pmenu", { bg = "#000000", fg = "#abb2bf" })
 vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#5c6370", fg = "#e5c07b" })
+-- vim.g.fzf_binary = "sk"  -- tell fzf-lua to use skim instead of fzf
+--
+-- require("fzf-lua").setup({
+--   fzf_bin = "sk",   -- use skim
+-- })
 
 -- plugin focused keymaps
 map({ "n", "v", "x" }, "-", "<Cmd>Oil<CR>")
 map({ "n" }, "<leader>ff", "<Cmd>FzfLua builtin<CR>")
 map({ "n" }, "<leader>fe", "<Cmd>lua require('fzf-lua').files({cwd = vim.fn.expand('%:h')})<CR>")
 map(
-	"n",
-	"<leader>fp",
-	':<C-u>lua require("fzf-lua").git_files({cwd = vim.fn.systemlist("git -C " .. vim.fn.fnameescape(vim.fn.expand("%:h")) .. " rev-parse --show-toplevel 2>/dev/null")[1]})<CR><CR>',
-	{ desc = "FzfLua local git files search" }
+  "n",
+  "<leader>fp",
+  ':<C-u>lua require("fzf-lua").git_files({cwd = vim.fn.systemlist("git -C " .. vim.fn.fnameescape(vim.fn.expand("%:h")) .. " rev-parse --show-toplevel 2>/dev/null")[1]})<CR><CR>',
+  { desc = "FzfLua local git files search" }
 )
+map("n","<leader>fc","<Cmd>lua require('fzf-lua').files({cwd = '~/Dotfiles/'})<CR>")
 map({ "n" }, "<leader>fo", "<Cmd>FzfLua oldfiles<CR>")
 map({ "n" }, "<leader>fg", "<Cmd>FzfLua blines<CR>")
 map({ "n" }, "<leader>fG", "<Cmd>FzfLua grep_project<CR>")
-map({ "n" }, "<leader>fc", "<Cmd>FzfLua command_history<CR>")
+map({ "n" }, "<leader>f:", "<Cmd>FzfLua command_history<CR>")
 
 -- THE END [[[[[[[[[[[[[[[[[[[ [ NVIM ADVANCED CONFIG ] ]]]]]]]]]]]]]]]]]]
 vim.api.nvim_create_user_command("Biome", function()
-	local filepath = vim.fn.expand("%:p")
-	vim.fn.jobstart({ "biome", "format", "--write", filepath }, { -- note it also save the file
-		--vim.fn.jobstart runs asynchronously so we used on_exit means after exiting by biome
-		on_exit = function()
-			vim.cmd("edit!") -- reload file after formatting
-		end,
-	})
+  local filepath = vim.fn.expand("%:p")
+  vim.fn.jobstart({ "biome", "format", "--write", filepath }, { -- note it also save the file
+    --vim.fn.jobstart runs asynchronously so we used on_exit means after exiting by biome
+    on_exit = function()
+      vim.cmd("edit!") -- reload file after formatting
+    end,
+  })
 end, {})
 map("n", "<leader>Lf", "<cmd>Biome<CR>")
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking text",
-	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+  desc = "Highlight when yanking text",
+  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- vim.api.nvim_create_autocmd('TextChangedI', {
@@ -175,12 +209,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = group,
   pattern = "*",
-callback = function(args)
-  local bt = vim.bo[args.buf].buftype
-  if bt == "" then  -- only normal files
-    pcall(function() vim.cmd("loadview") end)
+  callback = function(args)
+    local bt = vim.bo[args.buf].buftype
+    if bt == "" then -- only normal files
+      pcall(function() vim.cmd("loadview") end)
+    end
   end
-end
 })
 
 -- vim.api.nvim_create_autocmd("BufWritePre", {
