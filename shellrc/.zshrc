@@ -26,13 +26,10 @@ alias ls='exa --icons --color=automatic  -s old '
 alias tre='exa --tree --icons -s old --level '
 notes() {
   local file=$(fd . /home/prem/Documents/Notes -t f | cut -d'/' -f6- | sk --color=bw --margin=5,35,15 )
-  [ -n "$file" ] && v "$file"
+   nvim "/home/prem/Documents/Notes/$file"
 }
 vim() {
   NVIM_APPNAME="nvim.bak" nvim $1
-}
-v() {
-  NVIM_APPNAME="nvim_mini" nvim $1
 }
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -85,7 +82,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' sk-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
@@ -225,6 +222,6 @@ conf() {
 #   [ -n "$pid" ] && kill "$pid" && echo "Killed process $pid"
 # }
 # Set this only once in your shell config
-snvim() {
-  sudo -E NVIM_APPNAME="nvim_mini" nvim $1
+sv() {
+  sudo -E nvim $1
 }

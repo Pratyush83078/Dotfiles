@@ -82,7 +82,6 @@ bindsym $mod+ctrl+w exec bash -c 'nmcli r w off && dunstify -u low "WAIT 10s" &&
 bindsym $mod+shift+w exec bash -c 'nmcli r w off && dunstify -u low "WAIT 10s" && nmcli r w on && sleep 5 && nmcli d w connect "TBPG 1St floor" && dunstify "Connected" || dunstify "Connection Failed!"'
 bindsym $mod+ctrl+s exec feh /home/prem/Pictures/Screenshots/
 
-bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu
 floating_modifier Mod4 normal
@@ -207,8 +206,12 @@ bindsym $mod+Tab workspace back_and_forth
 
 #assign [app_id="foot"] workspace number 2
 for_window [app_id="thorium-browser"] move container to workspace 1; workspace 1
-for_window [app_id="foot" instance="foot"] move container to workspace 2 ; workspace 2
+# for_window [app_id="foot" ] move container to workspace 2 ; workspace 2
 for_window [app_id="mpv"] move container to workspace 3; workspace 3
+for_window [app_id="thunar"] move container to workspace 4; workspace 4
+bindsym $mod+Return exec sh -lc 'swaymsg \'[app_id="foot_tmux"]\' kill; foot --app-id=foot_tmux tmux new-session -A -s $(date +%H%p)'
+for_window [app_id="foot_tmux"] move container to workspace 2; workspace 2
+
 
 # Popup Foot → floating, centered, transparent, NO BLUR
 for_window [app_id="foot-popup"] \

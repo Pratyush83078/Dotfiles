@@ -1,0 +1,36 @@
+#!/bin/bash
+
+DIRS=(
+    "$HOME/Documents"
+    "$HOME/.config"
+    "$HOME/Videos/"
+    "$HOME/Videos/telegram"
+    "$HOME"
+)
+
+# If user passed a directory as argument
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    # Search all dirs with fd, let user pick with sk
+    selected=$(fd . --type=dir --max-depth=1 -L "${DIRS[@]}" \
+        | sed "s|^$HOME/||" \
+        | sk --margin 10% --color="bw")
+
+    [[ $selected ]] && selected="$HOME/$selected"
+fi
+
+# Exit if nothing selected
+[[ -z $selected ]] && exit 0
+
+# Session name = last part of path, dots → underscores
+selected_name=$(basename "$selected" | tr . _)
+
+# Create session if it doesn’t exist
+if ! tmux has-session -t "$selected_name" 2>/dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+# Switch to it
+tmux switch-client -t "$selected_name"
+
