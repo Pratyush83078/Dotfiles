@@ -1,3 +1,4 @@
+
 vim.g.maplocalleader = "\\"
 vim.g.mapleader = " "
 
@@ -36,6 +37,11 @@ vim.opt.titlestring = '%t%( %M%)%( (%{expand("%:~:h")})%)%a (nvim)'
 vim.o.completeopt = "menu,preview,fuzzy,menuone,noselect"
 vim.opt.pumblend = 20
 vim.opt.pumheight = 10
+vim.opt.undodir = os.getenv("HOME") .. "/.local/share/.vim/undodir"
+vim.opt.termguicolors = true
+vim.opt.isfname:append("@-@")
+vim.opt.updatetime = 50
+
 -- vim.opt.more = false
 
 vim.pack.add({
@@ -55,6 +61,7 @@ vim.pack.add({
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/windwp/nvim-autopairs" },
   { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+  { src = "https://github.com/mbbill/undotree" },
   -- { src = "https://github.com/OXY2DEV/markview.nvim" },
 })
 
@@ -64,20 +71,17 @@ require("Comment").setup()
 require("oil").setup()
 require("mason").setup()
 require("mason-lspconfig").setup()
+-- require("undotree").setup() -- it can directly be used as it is written in vimscript not in luascript so(gives error)
 -- require "nvim-treesitter".setup({ highlight = { enable = true } })
 vim.lsp.enable({ "lua_ls", "jdtls", "tsserver", "render-markdown" })
 
 vim.diagnostic.config({
-  virtual_lines = true,
+  -- virtual_lines = true,
+  virtual_text = true,
   signs = true,
 })
 
--- local capabilities = require('blink.cmp').get_lsp_capabilities()
--- local lspconfig = require('lspconfig')
--- lspconfig.lua_ls.setup({
---   capabilities = capabilities
--- })
--- lspconfig.ts_ls.setup({
+
 --   capabilities = capabilities
 -- })
 
@@ -128,7 +132,7 @@ end)
 map({ "n", "t", "i" }, "<localleader>t", ToggleTerm, { noremap = true, silent = true })
 map("n", "<localleader>d", ":lua vim.diagnostic.setqflist()<CR>:q<CR>")
 map({ "i" }, "jk", "<C-[>l")
-
+map("n","<leader>uu", vim.cmd.UndotreeToggle)
 
 vim.cmd([[ hi @function.builtin guifg = yellow ]])
 vim.cmd("colorscheme solarized-osaka")
@@ -154,6 +158,7 @@ map(
 map("n","<leader>fc","<Cmd>lua require('fzf-lua').files({cwd = '~/Dotfiles/'})<CR>")
 map({ "n" }, "<leader>fo", "<Cmd>FzfLua oldfiles<CR>")
 map({ "n" }, "<leader>fg", "<Cmd>FzfLua blines<CR>")
+map("n","<leader>x","<cmd>!chmod +x %<Cr> ")
 map({ "n" }, "<leader>fG", "<Cmd>FzfLua grep_project<CR>")
 map({ "n" }, "<leader>f:", "<Cmd>FzfLua command_history<CR>")
 
@@ -221,3 +226,8 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 --   pattern = "*",
 --   command = [[%s/\s\+$//e]],
 -- })
+-- vim.cmd [[packadd journex]]
+vim.keymap.set("n", "<localleader>fj", function()
+    vim.cmd [[packadd journex]]
+    require("journex.core")
+end)

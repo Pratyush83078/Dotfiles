@@ -25,8 +25,32 @@ export LS_COLORS='di=1;35:fi=0;37:ln=1;36:pi=40;33:so=1;35:do=1;35:bd=40;33;1:cd
 alias ls='exa --icons --color=automatic  -s old '
 alias tre='exa --tree --icons -s old --level '
 notes() {
-  local file=$(fd . /home/prem/Documents/Notes -t f | cut -d'/' -f6- | sk --color=bw --margin=5,35,15 )
+  local file=$(fd . /home/prem/Documents/Notes -t f | cut -d'/' -f6- | sk --color=bw --margin=5,35,15 --print-query )
+  [[ -z $file ]] && return;
    nvim "/home/prem/Documents/Notes/$file"
+}
+spdf() {
+  local select
+  select=$(fd . -e pdf | sk --with-nth=-1 --delimiter /) || return
+  [[ -z $select ]] && return
+  nohup zathura "$select" >/dev/null 2>&1 &
+}
+sfile() {
+  local file
+  file=$(fd . -t f --max-depth 3 -L | sk) || return
+
+  if file -L --mime "$file" | grep -q 'text/'; then
+    nvim "$file"
+  else
+    nohup xdg-open "$file" >/dev/null 2>&1 &
+  fi
+}
+sdir() {
+  while true; do
+    local dir
+    dir=$(fd . --type=dir --max-depth 3  -L | sk) || return
+    cd "$dir" || return
+  done
 }
 vim() {
   NVIM_APPNAME="nvim.bak" nvim $1
@@ -82,7 +106,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' sk-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
@@ -90,7 +113,6 @@ alias c='clear'
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
 
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/go/bin"
