@@ -41,8 +41,10 @@ vim.opt.undodir = os.getenv("HOME") .. "/.local/share/.vim/undodir"
 vim.opt.termguicolors = true
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
+vim.opt.formatoptions:remove "o"
 
 -- vim.opt.more = false
+
 
 vim.pack.add({
   { src = "https://github.com/stevearc/oil.nvim" },
@@ -73,7 +75,12 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 -- require("undotree").setup() -- it can directly be used as it is written in vimscript not in luascript so(gives error)
 -- require "nvim-treesitter".setup({ highlight = { enable = true } })
-vim.lsp.enable({ "lua_ls", "jdtls", "tsserver", "render-markdown" })
+-- define function
+local function enable_my_lsps()
+  vim.lsp.enable({ "lua_ls", "jdtls", "tsserver", "render-markdown" })
+  print("LSPs enabled for this buffer")
+end
+vim.keymap.set("n", "<leader>lsp", enable_my_lsps, { desc = "Enable LSPs" })
 
 vim.diagnostic.config({
   -- virtual_lines = true,
@@ -123,7 +130,7 @@ map({ "n", "v", "x" }, "<localleader><localleader>", '"+')
 map("n", "<leader>lf", vim.lsp.buf.format)
 map("i", "<C-c>", "<Esc>")
 map("t", "<C-[>", "<C-\\><C-n>")
-vim.keymap.set("n", "<localleader>v",
+vim.keymap.set("n", "<localleader>cn",
 function ()
  vim.cmd((vim.fn.expand("%:p") == vim.fn.expand("~/.config/nvim/init.lua"))
     and "edit #"
@@ -160,6 +167,21 @@ map({ "n" }, "<leader>fo", "<Cmd>FzfLua oldfiles<CR>")
 map({ "n" }, "<leader>fg", "<Cmd>FzfLua blines<CR>")
 map("n","<leader>x","<cmd>!chmod +x %<Cr> ")
 map({ "n" }, "<leader>fG", "<Cmd>FzfLua grep_project<CR>")
+
+vim.cmd [[packadd journex]]
+
+vim.keymap.set("n", "<localleader>jt", function()
+  require("journex").openToday()
+end)
+
+vim.keymap.set("n", "<localleader>jn", function()
+  require("journex").openNext()
+end)
+
+vim.keymap.set("n", "<localleader>jp", function()
+  require("journex").openPrev()
+end)
+
 map({ "n" }, "<leader>f:", "<Cmd>FzfLua command_history<CR>")
 
 -- THE END [[[[[[[[[[[[[[[[[[[ [ NVIM ADVANCED CONFIG ] ]]]]]]]]]]]]]]]]]]
@@ -226,8 +248,3 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 --   pattern = "*",
 --   command = [[%s/\s\+$//e]],
 -- })
--- vim.cmd [[packadd journex]]
-vim.keymap.set("n", "<localleader>fj", function()
-    vim.cmd [[packadd journex]]
-    require("journex.core")
-end)
