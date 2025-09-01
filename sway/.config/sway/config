@@ -9,8 +9,8 @@ set $term foot
 set $menu bemenu-run
 
 
-output * bg ~/Pictures/EyesOnCrack/wallpapers/beach.jpg fill
-output eDP-1 mode 1366x768@48.017Hz
+output * bg $HOME/.config/sway/wallpapers/beach.jpg fill
+#output eDP-1 mode 1366x768@48.017Hz
 # bindsym $mod+m output "HDMI-A-2" toggle ; output "eDP-1" toggle
 
 exec swayidle -w \

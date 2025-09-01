@@ -1,5 +1,5 @@
 #font=Meslo LGM Nerd Font
-image=/home/prem/Pictures/EyesOnCrack/wallpapers/beach.jpg
+image=$HOME/.config/sway/wallpapers/beach.jpg
 font-size=44
 scaling=fill
 
