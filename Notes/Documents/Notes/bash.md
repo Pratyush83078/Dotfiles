@@ -11,8 +11,17 @@
     
   - if[ $A = "2"] 
     then 
-      echo "x"
+        echo "x"
     fi
+  - (()) : for c like syntax inside a==b etc;(only integer)
+  - [[]] : preferred as it is mix of bash and popular programming language
+
+  - | Form        | Use case                                                    |
+    | ----------- | ----------------------------------------------------------- |
+    | `[ ]`       | POSIX standard, use for portability. Needs careful quoting. |
+    | `[[ ]]`     | Bash/Zsh safer modern tests. Use by default in Bash.        |
+    | `(( ))`     | Arithmetic conditions and math.                             |
+    | no brackets | Use a command’s success/failure.                            | 
 
 
 # Packages

@@ -1,21 +1,16 @@
 font pango:MesloLGSDZNerdFont 7
 set $mod Mod4
-seat * xcursor_theme macOS 25
 
 set $left h
 set $down j
 set $up k
 set $right l
-
 set $term foot
 set $menu bemenu-run
-bindsym $mod+Shift+d exec /home/prem/.local/bin/window.sh
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+
+
 output * bg ~/Pictures/EyesOnCrack/wallpapers/beach.jpg fill
-#beach,marketplace,
 output eDP-1 mode 1366x768@48.017Hz
-#output * allow_tearing yes
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 # bindsym $mod+m output "HDMI-A-2" toggle ; output "eDP-1" toggle
 
 exec swayidle -w \
@@ -32,59 +27,52 @@ input "type:touchpad" {
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
+    drag_lock disabled
     scroll_factor 1.0
     accel_profile "adaptive"
     pointer_accel 0.8
 
 }
+
 bindgesture swipe:right workspace prev
 bindgesture swipe:left workspace next
 bindgesture swipe:down move workspace 10
 bindgesture swipe:up workspace number 10
-#You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-# bindsym Mod4+j workspace prev
-# bindsym Mod4+k workspace next
-
-bindsym XF86MonBrightnessUp exec killall $HOME/.local/bin/brightness.sh; exec brightnessctl set +1% && $HOME/.local/bin/brightness.sh
-bindsym XF86MonBrightnessDown exec killall $HOME/.local/bin/brightness.sh; exec brightnessctl set 1%- && $HOME/.local/bin/brightness.sh
-bindsym XF86AudioRaiseVolume  exec killall $HOME/.local/bin/volume.sh ; exec pamixer --increase 5 && $HOME/.local/bin/volume.sh
-bindsym XF86AudioLowerVolume  exec killall $HOME/.local/bin/volume.sh ; exec pamixer --decrease 5 && exec $HOME/.local/bin/volume.sh
-bindsym XF86AudioMute exec killall "$HOME/.local/bin/volume.sh";exec pamixer --toggle-mute && $HOME/.local/bin/volume.sh
+bindsym XF86MonBrightnessUp exec killall $HOME/Documents/bin/brightness.sh; exec brightnessctl set +1% && $HOME/Documents/bin/brightness.sh
+bindsym XF86MonBrightnessDown exec killall $HOME/Documents/bin/brightness.sh; exec brightnessctl set 1%- && $HOME/Documents/bin/brightness.sh
+bindsym XF86AudioRaiseVolume  exec killall $HOME/Documents/bin/volume.sh ; exec pamixer --increase 5 && $HOME/Documents/bin/volume.sh
+bindsym XF86AudioLowerVolume  exec killall $HOME/Documents/bin/volume.sh ; exec pamixer --decrease 5 && exec $HOME/Documents/bin/volume.sh
+bindsym XF86AudioMute exec killall "$HOME/Documents/bin/volume.sh";exec pamixer --toggle-mute && $HOME/Documents/bin/volume.sh
 bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPrev exec playerctl position 10-
-bindsym XF86AudioNext exec playerctl position 10+
+bindsym XF86AudioPrev exec playerctl position 20-
+bindsym XF86AudioNext exec playerctl position 20+
 bindsym Mod4+ctrl+Shift+t input type:touchpad events toggle enabled disabled ;
 
-exec --no-startup-id  $HOME/.local/bin/autotiling
-exec --no-startup-id  wl-paste --watch $HOME/.local/bin/clipboard_save.sh
-#exec --no-startup-id systemctl --user restart dunst
-exec --no-startup-id /usr/bin/dunst
-bindsym ctrl+Shift+space exec /usr/bin/dunstctl history-pop
 bindsym $mod+n exec gammastep -O 3000
 bindsym $mod+Shift+n exec pkill gammastep
-# bindsym Mod4+f exec foot bash -ic 'cd "$(cat /tmp/yazi-cwd 2>/dev/null || echo $HOME)"; yazi --cwd-file=/tmp/yazi-cwd'
-# bindsym Mod4+l exec swaylock -f -c 000000
-bindsym Mod4+v exec $HOME/.local/bin/tofi_clipboard.sh
-bindsym Mod4+p exec hyprpicker | wl-copy
-
-bindsym $mod+Shift+q exec swaymsg -t get_tree | jq '.. | select(.focused?) | .pid' | xargs -r kill -9
-# bindsym $mod+s exec dunstify "Sync Enabled" -t 600 && syncthing --no-browser
-#bindsym $mod+Shift+s exec dunstify "Sync Disabled" -t 600 && pkill syncthing
+exec --no-startup-id /usr/bin/dunst
 bindsym ctrl+Return exec "dunstctl close"
-bindsym $mod+t exec ~/.timer.sh
+bindsym ctrl+Shift+space exec /usr/bin/dunstctl history-pop
+
+exec --no-startup-id  $HOME/Documents/bin/autotiling
+exec --no-startup-id  wl-paste --watch $HOME/Documents/bin/clipboard_save.sh add
+bindsym $mod+v exec $HOME/Documents/bin/clipboard_save.sh sel
+bindsym Mod4+p exec hyprpicker | wl-copy
+bindsym $mod+t exec ~/Documents/bin/.timer.sh
+
 bindsym Print exec grim ~/Pictures/Screenshots/$(date +'%d%b%y__%H:%M:%S').png && dunstify -u low -t 500 " Screenshot saved "
 bindsym $mod+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +'%d%b%y__%H:%M:%S').png
 bindsym ctrl+Shift+Print exec wl-paste | swappy -f -
 bindsym ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+ctrl+s exec feh /home/prem/Pictures/Screenshots/
 
 bindsym $mod+ctrl+w exec bash -c 'nmcli r w off && dunstify -u low "WAIT 10s" && nmcli r w on && sleep 5 && nmcli d w connect "iQOO Z7 5G" && dunstify "Connected" || dunstify "Connection Failed!"'
 bindsym $mod+shift+w exec bash -c 'nmcli r w off && dunstify -u low "WAIT 10s" && nmcli r w on && sleep 5 && nmcli d w connect "TBPG 1St floor" && dunstify "Connected" || dunstify "Connection Failed!"'
-bindsym $mod+ctrl+s exec feh /home/prem/Pictures/Screenshots/
 
-bindsym $mod+q kill
 bindsym $mod+d exec $menu
-floating_modifier Mod4 normal
+bindsym $mod+q kill
+
+# -------- SWAY BASICS WINDOW CONFIG --------
 bindsym $mod+Shift+c reload
 bindsym $mod+ctrl+Shift+e exec swaymsg exit
 
@@ -121,17 +109,20 @@ bindsym $mod+e layout toggle splitv splith
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
+floating_modifier Mod4 normal
 
-bindsym $mod+Shift+period move scratchpad
 bindsym $mod+period scratchpad show
-bindsym F10 bar mode toggle
+bindsym $mod+Shift+period move scratchpad
 
+bindsym F10 bar mode toggle
 bar {
-    position top
+  position top
 	mode hide
     hidden_state hide
 	modifier Mod3
-    status_command  while $HOME/Documents/shFiles/barstats ; do sleep 1; done;
+  status_command i3status-rs ~/.config/i3status-rust/config.toml
+  font pango:MesloLGSDZNerdFont 8
+    
     colors {
         statusline #ffffff
         background #111122dd
@@ -144,19 +135,15 @@ mode Mouse {
     bindsym f mode default, exec 'wl-kbptr-sway-active-win; swaymsg mode Mouse'
     bindsym Shift+f mode default, exec 'wl-kbptr; swaymsg mode Mouse'
 
-    # Mouse move (Vim-like)
     bindsym h seat seat0 cursor move -15 0
     bindsym j seat seat0 cursor move 0 15
     bindsym k seat seat0 cursor move 0 -15
     bindsym l seat seat0 cursor move 15 0
-
-    # Fast jumps
     bindsym shift+k seat seat0 cursor move 0 -100
     bindsym shift+j seat seat0 cursor move 0 100
     bindsym shift+h seat seat0 cursor move -100 0
     bindsym shift+l seat seat0 cursor move 100 0
 
-    # Left / middle / right click
     bindsym Return seat seat0 cursor press button1
     bindsym --release Return seat seat0 cursor release button1
 
@@ -171,12 +158,9 @@ mode Mouse {
 
     bindsym ctrl+c mode default, exec "swaymsg bar bar-0 mode hide"
 }
-
 bindsym $mod+m mode Mouse, exec "swaymsg bar bar-0 mode dock"
 bindsym $mod+shift+m exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
-
 seat seat0 hide_cursor 2000
-
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #222222 #3A3530 #eceff4 #481305   #491305
@@ -184,44 +168,34 @@ client.focused_inactive #222222 #000000 #d8dee9 #000000   #000000
 client.unfocused        #222222 #000000 #d8dee9 #000000   #000000
 client.urgent           #222222 #ebcb8b #2e3440 #8fbcbb   #ebcb8b
 
-#for_window [class="^.*"] border pixel 3;
+for_window [class="^.*"] border pixel 3;
 for_window [class="^.*"] opacity 0.88
 
 blur enable
-#blur_passes 4
-#blur_radius 5
 #blur_noise 0.1
-#blur_brightness 0.9
 #blur_contrast 1.3
 blur_passes 3
 blur_radius 4
 blur_brightness 1.1
 default_border pixel 2
-titlebar_separator disable
 titlebar_border_thickness 2
 titlebar_padding 9 2
 hide_edge_borders smart
 bindsym $mod+s exec ~/.config/sway/scratchpad.sh
 bindsym $mod+Tab workspace back_and_forth
 
-#assign [app_id="foot"] workspace number 2
 for_window [app_id="thorium-browser"] move container to workspace 1; workspace 1
-# for_window [app_id="foot" ] move container to workspace 2 ; workspace 2
 for_window [app_id="mpv"] move container to workspace 3; workspace 3
 for_window [app_id="thunar"] move container to workspace 4; workspace 4
-bindsym $mod+Return exec sh -lc 'swaymsg \'[app_id="foot_tmux"]\' kill; foot --app-id=foot_tmux tmux new-session -A -s $(date +%H%p)'
-for_window [app_id="foot_tmux"] move container to workspace 2; workspace 2
+bindsym $mod+Return exec sh -lc '$term --app-id=foot_tmux tmux attach || tmux new -s main'
+# bindsym $mod+Return exec sh -lc 'swaymsg \'[app_id="foot_tmux"]\' kill; $term --app-id=foot_tmux tmux attach'
+# for_window [app_id="foot" ] move container to workspace 2 ; workspace 2
+# for_window [app_id="foot_tmux"] move container to workspace 2; workspace 2
 
-
-# Popup Foot → floating, centered, transparent, NO BLUR
+bindsym $mod+Shift+return exec sh -lc '$term --app-id=foot-popup  tmux new-session -A -s popup'
 for_window [app_id="foot-popup"] \
     floating enable, \
     move position 660px 300px, \
     resize set 700 500, \
     blur disable, \
     opacity 0.6, 
-    # move container to workspace 3 ; workspace 3
-
-bindsym $mod+Shift+return exec sh -lc 'foot --app-id=foot-popup  tmux new-session -A -s popup'
-
-include /etc/sway/config.d/*foot

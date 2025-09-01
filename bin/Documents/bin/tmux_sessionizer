@@ -5,6 +5,7 @@ DIRS=(
     "$HOME/.config"
     "$HOME/Videos/"
     "$HOME/Videos/telegram"
+    "$HOME/.local/"
     "$HOME"
 )
 

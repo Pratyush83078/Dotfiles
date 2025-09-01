@@ -25,7 +25,7 @@ export LS_COLORS='di=1;35:fi=0;37:ln=1;36:pi=40;33:so=1;35:do=1;35:bd=40;33;1:cd
 alias ls='exa --icons --color=automatic  -s old '
 alias tre='exa --tree --icons -s old --level '
 notes() {
-  local file=$(fd . /home/prem/Documents/Notes -t f | cut -d'/' -f6- | sk --color=bw --margin=5,35,15 --print-query )
+  local file=$(fd . /home/prem/Documents/Notes -t f | cut -d'/' -f6- | sk --color=bw --margin=5,35,15 )
   [[ -z $file ]] && return;
    nvim "/home/prem/Documents/Notes/$file"
 }

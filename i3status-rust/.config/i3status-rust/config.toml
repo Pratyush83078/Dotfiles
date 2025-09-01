@@ -1,0 +1,122 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "dracula"
+# [theme.overrides]
+# idle_bg = "#123456"
+# idle_fg = "#abcdef"
+
+[icons]
+icons = "awesome6"
+# [icons.overrides]
+# bat = " | | "
+# bat_full = " |X| "
+# bat_charging = " |^| "
+# bat_discharging = " |v| "
+
+[[block]]
+block = "focused_window"
+[block.format]
+short = "$marks $visible_marks $title.str(w:120) |"
+full = "$marks $visible_marks $title | No Window " 
+
+[[block]]
+block = "tea_timer"
+format = " $icon {$minutes:$seconds |}"
+done_cmd = "notify-send 'Timer Finished'"
+
+[[block]]
+block = "memory"
+format = " $icon $mem_used.eng(w:4)/$mem_total.eng(w:4) "
+interval = 2
+format_alt = " 💾 Swap: $swap_used.eng(w:4)/$swap_total.eng(w:4) "
+warning_mem = 70
+critical_mem = 90
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+# [[block]]
+# block = "backlight"
+# if_command = "test -e /sys/class/backlight/intel_backlight"
+
+# [[block]]
+# block = "disk_space"
+# path = "/"
+# info_type = "used"
+# format = " $icon $path $percentage|"
+# alert_unit = "GB"
+# alert = 3.0
+# warning = 5.0
+
+# [[block]]
+# block = "disk_space"
+# path = "/home"
+# info_type = "used"
+# format = " $icon $path $percentage|"
+# alert_unit = "GB"
+# alert = 10.0
+# warning = 15.0
+
+[[block]]
+block = "cpu"
+interval = 1
+format = " ⚡ $barchart $utilization "
+format_alt = " $frequency{ $boost|} "
+
+# [[block]]
+# block = "net"
+# device = "enp0s20f0u3"
+# format = "🖧 {$speed_up.eng(w:4)}↑ {$speed_down.eng(w:4) $frequency }↓"
+# interval = 1
+
+[[block]]
+block = "net"
+format = " $icon  {$speed_down.eng(w:4)↓ $ssid $signal_strength |Wired connection}"
+interval = 1
+
+[[block]]
+block = "battery"
+if_command = "test -e /sys/class/power_supply/BAT0"
+device = "BAT0"
+format = "$percentage |N/A"
+
+[[block]]
+block = "time"
+interval = 60
+[block.format]
+# full = " $icon $timestamp.datetime(f:'%A %e %B %Y, %H:%M', l:fr_FR) "
+short = "$icon $timestamp.datetime(f:'%F %H:%M') "
+[[block.click]]
+button = "left"
+cmd = "swaymsg exec 'foot --app-id=foot-popup -e bash -c \"cal; read \"'"
+#or use gsimplecal
+
+# [[block]]
+# block = "custom"
+# command = ''' cat /sys/class/thermal/thermal_zone0/temp | awk '{printf("%.1f\n",$1/1000)}' '''
+
+# [[block]]
+# block = "custom"
+# command = ''' cat /sys/class/backlight/intel_backlight/brightness | awk '{print $1}' '''
+# signal = 4
+# interval = "once"
+
+[[block]]
+block = "menu"
+text = "\uf011  "
+[[block.items]]
+display = " -&gt;   Sleep   &lt;-"
+cmd = "systemctl suspend"
+confirm_msg = "OK then click me!! "
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "poweroff"
+confirm_msg = "ARE YOU SURE??"
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "reboot"
+confirm_msg = "ARE YOU SURE??"

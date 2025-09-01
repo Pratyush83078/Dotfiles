@@ -23,7 +23,7 @@ vim.opt.colorcolumn = "105"
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.smartcase = true
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 12
 vim.opt.ignorecase = true
 
 vim.opt.undofile = true
@@ -77,7 +77,7 @@ require("mason-lspconfig").setup()
 -- require "nvim-treesitter".setup({ highlight = { enable = true } })
 -- define function
 local function enable_my_lsps()
-  vim.lsp.enable({ "lua_ls", "jdtls", "tsserver", "render-markdown" })
+  vim.lsp.enable({ "lua_ls", "jdtls", "tsserver", "render-markdown","bash-langauge-server" })
   print("LSPs enabled for this buffer")
 end
 vim.keymap.set("n", "<leader>lsp", enable_my_lsps, { desc = "Enable LSPs" })
@@ -140,6 +140,8 @@ map({ "n", "t", "i" }, "<localleader>t", ToggleTerm, { noremap = true, silent = 
 map("n", "<localleader>d", ":lua vim.diagnostic.setqflist()<CR>:q<CR>")
 map({ "i" }, "jk", "<C-[>l")
 map("n","<leader>uu", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<F11>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("n", "<F12>", "<Nop>", { noremap = true, silent = true })
 
 vim.cmd([[ hi @function.builtin guifg = yellow ]])
 vim.cmd("colorscheme solarized-osaka")

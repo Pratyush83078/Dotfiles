@@ -7,3 +7,4 @@
     - priority /etc/systemd/system/ then /run/systemd/system/(runtime services) then /lib/systemd/system/
     - systemctl edit --full
     - systemctl daemon-reload
+    - systemd as a timer (cronjob replacement)
