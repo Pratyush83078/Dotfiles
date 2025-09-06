@@ -1,4 +1,3 @@
-
 vim.g.maplocalleader = "\\"
 vim.g.mapleader = " "
 
@@ -8,6 +7,7 @@ vim.opt.numberwidth = 5
 vim.opt.relativenumber = true
 
 vim.opt.wrap = false
+vim.keymap.set('n','<M-z>',':set wrap!<Cr>')
 vim.opt.linebreak = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -42,7 +42,7 @@ vim.opt.termguicolors = true
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.formatoptions:remove "o"
-
+vim.g.markdown_recommended_style = 0
 -- vim.opt.more = false
 
 
@@ -81,6 +81,7 @@ local function enable_my_lsps()
   print("LSPs enabled for this buffer")
 end
 vim.keymap.set("n", "<leader>lsp", enable_my_lsps, { desc = "Enable LSPs" })
+vim.keymap.set("n", "<localleader>lsp","<Cmd>LspStop<Cr>" , { desc = "Disable LSPs" })
 
 vim.diagnostic.config({
   -- virtual_lines = true,
@@ -140,8 +141,8 @@ map({ "n", "t", "i" }, "<localleader>t", ToggleTerm, { noremap = true, silent = 
 map("n", "<localleader>d", ":lua vim.diagnostic.setqflist()<CR>:q<CR>")
 map({ "i" }, "jk", "<C-[>l")
 map("n","<leader>uu", vim.cmd.UndotreeToggle)
-vim.keymap.set("n", "<F11>", "<Nop>", { noremap = true, silent = true })
-vim.keymap.set("n", "<F12>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("", "<F11>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("", "<F12>", "<Nop>", { noremap = true, silent = true })
 
 vim.cmd([[ hi @function.builtin guifg = yellow ]])
 vim.cmd("colorscheme solarized-osaka")

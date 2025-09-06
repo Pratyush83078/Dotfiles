@@ -48,10 +48,25 @@ sfile() {
 sdir() {
   while true; do
     local dir
-    dir=$(fd . --type=dir --max-depth 3  -L | sk) || return
+    dir=$(fd . --type=dir --max-depth 2  -L | sk --prompt="cd $dir" --margin=6,25 --preview 'exa --icons --tree --level 2 --color=always {}') || return
     cd "$dir" || return
   done
 }
+sroot() {
+  local dir='/';
+  while true; do
+    dir=$(fd -a . "$dir" --type=dir --max-depth 2  -L | sk --prompt="cd $dir" --margin=6,25 --preview 'ls --color=always {}') || return
+    cd "$dir" || return
+  done
+}
+cd() { builtin cd "$@" || return; echo "$PWD" >> ~/.cd_history; }
+
+cdhist() {
+  local dir="$pwd";
+  dir=$(tac ~/.cd_history | awk '!seen[$0]++' | sk --prompt="cd $dir" --margin=6,25 --preview 'exa --icons --tree --level 1 --color=always {}') || return
+  cd "$dir" || return
+}
+
 vim() {
   NVIM_APPNAME="nvim.bak" nvim $1
 }
@@ -100,6 +115,7 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt autocd
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -182,11 +198,7 @@ da() {
 
 # Utility functions
 timer() { sleep "$1" && dunstify -u critical "Timer completed: $1"; }
-alert() { echo "dunstify -u critical 'Alert' 'Time to check your schedule'" | at "$1"; }
 torr() { transmission-cli -u 0 -w "$HOME/Videos/Movies" "$1"; }
-#gemini() {
-#   node /home/prem/downloads/gemini-cli-0.1.7/bundle/gemini.js "$@"
-#}
 alias gemini='node /home/prem/Downloads/gemini-cli-0.1.7/bundle/gemini.js'
 y() {
   local tmp="/tmp/yazi-cwd"

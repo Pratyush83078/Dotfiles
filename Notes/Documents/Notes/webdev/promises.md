@@ -12,7 +12,8 @@
 - string is also a class as var.toLowerCase() etc we can use
 
 - Promise class
-    - promise gives you a promise that i will return given fn(thing etc) after given time
-    - A Promise in Js is an obj that represents the eventual completion(or failure)of an asynchronous operation
-    - fnReturnPromise().then(callback)
-    - 
+
+  - promise gives you a promise that i will return given fn(thing etc) after given time
+  - A Promise in Js is an obj that represents the eventual completion(or failure)of an asynchronous operation
+  - fnReturnPromise().then(callback)
+    

@@ -18,7 +18,7 @@ icons = "awesome6"
 block = "focused_window"
 [block.format]
 short = "$marks $visible_marks $title.str(w:120) |"
-full = "$marks $visible_marks $title | No Window " 
+full = "$marks $visible_marks $title.str(w:39)   | No Window " 
 
 [[block]]
 block = "tea_timer"
@@ -75,7 +75,7 @@ format_alt = " $frequency{ $boost|} "
 
 [[block]]
 block = "net"
-format = " $icon  {$speed_down.eng(w:4)↓ $ssid $signal_strength |Wired connection}"
+format = " {$icon $ssid $signal_strength |🖧 Eth }$speed_down.eng(w:4)↓ "
 interval = 1
 
 [[block]]

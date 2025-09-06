@@ -116,12 +116,12 @@ bindsym $mod+Shift+period move scratchpad
 
 bindsym F10 bar mode toggle
 bar {
-  position top
+  position bottom
 	mode hide
     hidden_state hide
-	modifier Mod3
+	modifier Mod4
   status_command i3status-rs ~/.config/i3status-rust/config.toml
-  font pango:MesloLGSDZNerdFont 8
+  font pango:MesloLGSDZNerdFont 9
     
     colors {
         statusline #ffffff
@@ -170,17 +170,8 @@ client.urgent           #222222 #ebcb8b #2e3440 #8fbcbb   #ebcb8b
 
 for_window [class="^.*"] border pixel 3;
 for_window [class="^.*"] opacity 0.88
-
-blur enable
-#blur_noise 0.1
-#blur_contrast 1.3
-blur_passes 3
-blur_radius 4
-blur_brightness 1.1
-default_border pixel 2
-titlebar_border_thickness 2
-titlebar_padding 9 2
 hide_edge_borders smart
+
 bindsym $mod+s exec ~/.config/sway/scratchpad.sh
 bindsym $mod+Tab workspace back_and_forth
 
@@ -199,3 +190,22 @@ for_window [app_id="foot-popup"] \
     resize set 700 500, \
     blur disable, \
     opacity 0.6, 
+
+
+
+# exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+# exec /usr/lib/xdg-desktop-portal -r
+# exec /usr/lib/xdg-desktop-portal-wlr
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+# ------ SWAYfx - Eye Candy --------------
+
+blur enable
+#blur_noise 0.1
+#blur_contrast 1.3
+blur_passes 3
+blur_radius 4
+blur_brightness 1.1
+default_border pixel 2
+titlebar_border_thickness 2
+titlebar_padding 9 2

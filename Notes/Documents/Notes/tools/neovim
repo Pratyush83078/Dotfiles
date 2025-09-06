@@ -144,3 +144,6 @@ m<key> , `<key> to mark and go
 
 #comment.nvim
 - gb multiline , gc single line
+
+
+vim.fn.chansend(job_id,{"ls \r\n"})

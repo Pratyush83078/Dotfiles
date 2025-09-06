@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 dir_selected=$(fd . "$HOME/Videos/" --type=dir -d 2 -E "harkirat2.0" \
           | sed "s|^$HOME/Videos/||" \
-          | bemenu)
+          | sk --color=bw --margin=3)
 [[ -z $dir_selected ]] && exit 0
 
 video_path=$(echo "$HOME/Videos/$dir_selected")
-file_selected=$(fd . "$video_path" \
-  |  sed "s|$video_path||g" | bemenu)
+# file_selected=$(fd . "$video_path" \
+#   |  sed "s|$video_path||g" | sk --color=bw --margin=3 )
+#
+# [[ -z $file_selected ]] && exit 0
 
-[[ -z $file_selected ]] && exit 0
-
-dunstify -u l "Video Played: " "$file_selected " -t 1000
-nohup mpv --no-terminal "$video_path$file_selected" >/dev/null 2>&1 &
-tmux display-popup -C
-
+# dunstify -u l "Video Played: " "$file_selected " -t 1000
+# nohup mpv --no-terminal "$video_path$file_selected" >/dev/null 2>&1 &
+yazi $video_path
