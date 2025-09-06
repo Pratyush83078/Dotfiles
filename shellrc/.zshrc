@@ -61,7 +61,7 @@ sroot() {
 }
 cd() { builtin cd "$@" || return; echo "$PWD" >> ~/.cd_history; }
 
-cdhist() {
+shist() {
   local dir="$pwd";
   dir=$(tac ~/.cd_history | awk '!seen[$0]++' | sk --prompt="cd $dir" --margin=6,25 --preview 'exa --icons --tree --level 1 --color=always {}') || return
   cd "$dir" || return

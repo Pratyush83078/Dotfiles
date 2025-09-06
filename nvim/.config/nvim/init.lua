@@ -251,3 +251,8 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 --   pattern = "*",
 --   command = [[%s/\s\+$//e]],
 -- })
+
+map("n", "<leader>ls", function()
+  local file = vim.fn.expand("%:p")
+  vim.cmd("split | terminal live-server " .. file)
+end, { desc = "Live-server current file" })
