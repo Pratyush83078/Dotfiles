@@ -124,7 +124,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='ls --color'
+alias ls='exa --icons --color'
 alias c='clear'
 
 # Shell integrations

@@ -132,7 +132,7 @@ end)
 map(
   "n",
   "<leader>fp",
-  ':<C-u>lua require("fzf-lua").git_files({cwd = vim.fn.systemlist("git -C " .. vim.fn.fnameescape(vim.fn.expand("%:h")) .. " rev-parse --show-toplevel 2>/dev/null")[1]})<CR><CR>',
+  '<Cmd>FzfLua git_files<CR>',
   { desc = "FzfLua local git files search" }
 )
 map("n", "<leader>fc", "<Cmd>lua require('fzf-lua').files({cwd = '~/Dotfiles/'})<CR>")

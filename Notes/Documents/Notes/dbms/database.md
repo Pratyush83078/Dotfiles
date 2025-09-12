@@ -10,10 +10,11 @@ Feedback > text(data) > process>>
 data > processed (to enable decision making )
 > data is the new oil. 
 
+
 ## DATABASE
 > electronic place/systemwhere data is stored in a way that it can be easily accessed managed, and updated.
 
-DBMS - like os manages resources similarly dbms manages data
+DBMS- like os manages resources similarly dbms manages data
     - To make real use Data,
     - DB -> store
     - set of program
@@ -24,6 +25,7 @@ DBMS - like os manages resources similarly dbms manages data
     > in short DBMS is a program that manages where to store data 
         and how to access it (set of program) efficiently and convenient
         (constraint access)
+
 
 > (DBMS vs File system(old technique)) Problem not using any DBMS ie only using files etc.. 
     1. Data Redundancy & inconsistancy
