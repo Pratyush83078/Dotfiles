@@ -12,4 +12,4 @@ video_path=$(echo "$HOME/Videos/$dir_selected")
 
 # dunstify -u l "Video Played: " "$file_selected " -t 1000
 # nohup mpv --no-terminal "$video_path$file_selected" >/dev/null 2>&1 &
-yazi $video_path
+yazi "$video_path"

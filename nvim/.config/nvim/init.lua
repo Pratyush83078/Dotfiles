@@ -190,12 +190,12 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*.java",
-  callback = function()
-    vim.cmd("silent !google-java-format -i %")
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   pattern = "*.java",
+--   callback = function()
+--     vim.cmd("silent !google-java-format -i %")
+--   end,
+-- })
 
 -- vim.api.nvim_create_autocmd('TextChangedI', {
 --   pattern = '*', -- works in all buffers

@@ -35,3 +35,4 @@ DBMS- like os manages resources similarly dbms manages data
     5. Atomicity problems.(if debitted then creaditted also)
     6. concurrent-access anomalies
     7. Security problems
+

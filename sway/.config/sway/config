@@ -160,7 +160,7 @@ mode Mouse {
 }
 bindsym $mod+m mode Mouse, exec "swaymsg bar bar-0 mode dock"
 bindsym $mod+shift+m exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
-seat seat0 hide_cursor 2000
+# seat seat0 hide_cursor 20000
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #222222 #3A3530 #eceff4 #481305   #491305
