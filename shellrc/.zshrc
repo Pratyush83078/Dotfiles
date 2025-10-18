@@ -170,10 +170,11 @@ wifi_connect() {
   fi
   nmcli "${args[@]}"
 }
-alias railwire='wifi_connect "PRAMOD" "pmsrs1999"'
+alias railwire='wifi_connect "PRAMOD"'
 alias z9='wifi_connect "iQOO Z9x 5G"'
 alias iqoo='wifi_connect "iQOO Z7 5G"'
 alias tbpg='wifi_connect "TBPG 1St floor"'
+alias cmf='wifi_connect "cmf" "piyushraj"'
 # alias hostel='wifi_connect "EduHostelMdu" "Pratyush@123"'
 
 # ============================================================================

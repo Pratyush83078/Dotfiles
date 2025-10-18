@@ -66,4 +66,47 @@
   - therefore where is null(is is used here)
 
 ## JOINS
+- select [cols_name] from [left_table] left join [right_tablel] on [left_table] [column]=[right_table][col name]
+- inner join, left join, right join,
+
+- <> not equal operator
+
+## Union
+- just clone two tables (uniquely)
+- unique all (can contain duplicate)
+- no of attributes should be same in both and should be of same datatypes
+
+### multiple join
+
+- Distinct (unique)
+
+
+## group by and (count()-> [aggregate function])
+- We are summarizing the information based on the groups we are creating
+- select from where > group by [cols to group by] having [cond] order by (by default,asc)
+- without aggregate(count()) group by works as a distinct
+
+- So count(distinct col_name) counts no of unique value in that column
+- group by just make that col distinct like can be one two etc
+  - count(*)-> calculate all no of rows including null
+  - count(anyRandomValue)-> calc no. of rows excluding null
+### Having
+- having customer_id=7
+
+## Windows func and ranking func
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

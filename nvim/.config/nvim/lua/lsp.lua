@@ -1,4 +1,4 @@
-local servers = { "lua_ls", "jdtls", "ts_ls", "marksman", "bashls", "eslint", "tailwindcss", "html", "emmet_ls", "jsonls","cssls" }
+local servers = { "lua_ls","pyright","ruff", "jdtls", "ts_ls", "marksman", "bashls", "eslint", "tailwindcss", "html", "emmet_ls", "jsonls","cssls" }
 local DEservers={"ts_ls","marksman","bashls","emmet_ls","tailwindcss","html","cssls","jsonls"}
 vim.lsp.enable(DEservers);
 vim.lsp.config("emmet_ls", {
@@ -29,6 +29,7 @@ end
 vim.keymap.set("n", "<leader>lsp", enable_my_lsps, { desc = "Enable LSPs" })
 vim.keymap.set("n", "<localleader>lsp", disable_all_lsps, { desc = "Disable all LSPs" })
 vim.keymap.set({ "n", "i" }, "<localleader>java", "<Cmd>!java %<Cr>");
+vim.keymap.set({ "n", "i" }, "<localleader>py", "<Cmd>!python %<Cr>");
 -- vim.lsp.enable('jdtls', false)
 vim.diagnostic.config({
   virtual_text = true,
@@ -48,7 +49,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     "javascript", "typescript", "tsx", "html", "css", "json", "markdown", "svelte", "vue", "yaml", "c", "lua", "java",
-    "vim", "bash", "query", "dockerfile", "markdown_inline", "graphql", "vimdoc",
+    "vim", "bash", "query", "dockerfile", "markdown_inline", "graphql", "vimdoc","python",
   },
   highlight = {
     enable = true,
