@@ -35,6 +35,9 @@ notes() {
     nvim "/home/prem/Documents/Notes/$file"
   fi
 }
+todo(){
+  nvim "/home/prem/Documents/Notes/todos/$(date +%a).md"
+}
 spdf() {
   local select
   select=$(fd . -e pdf | sk --with-nth=-1 --delimiter /) || return

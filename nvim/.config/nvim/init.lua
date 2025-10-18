@@ -254,4 +254,7 @@ function ToggleTerm()
   end
 end
 map({"n","t"},"<localleader>t","<Cmd>lua ToggleTerm()<CR>");
+map({'n','i'}, '<localleader>cc', [[<C-[>mM:s/\[\( \|x\)\]/\=submatch(0)=='[ ]'?'[x]':'[ ]'/e<CR>:s/^\(\s*\)\(.*\[\( \|x\)\].*\)\@!/\1- [ ] /e<CR>`M]], { noremap = true, silent = true })
+-- Function to toggle checkbox at start of the line
+map({'n','i'}, '<localleader>ct', [[<C-[>mM:s/^\(\s*\)\(- \[[x ]\] \)\?/\=submatch(2)==''?submatch(1).'- [ ] ':submatch(1)/<CR>`M]], { noremap = true, silent = true })
 -- require("plugins.colorscheme").setup()
