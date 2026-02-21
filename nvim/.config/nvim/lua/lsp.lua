@@ -30,6 +30,7 @@ vim.keymap.set("n", "<leader>lsp", enable_my_lsps, { desc = "Enable LSPs" })
 vim.keymap.set("n", "<localleader>lsp", disable_all_lsps, { desc = "Disable all LSPs" })
 vim.keymap.set({ "n", "i" }, "<localleader>java", "<Cmd>!java %<Cr>");
 vim.keymap.set({ "n", "i" }, "<localleader>py", "<Cmd>!python %<Cr>");
+vim.keymap.set({ "n", "i" }, "<localleader>cpp", "<Cmd>!g++ %;./a.out<Cr>");
 -- vim.lsp.enable('jdtls', false)
 vim.diagnostic.config({
   virtual_text = true,

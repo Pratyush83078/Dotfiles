@@ -177,12 +177,18 @@ alias railwire='wifi_connect "PRAMOD"'
 alias z9='wifi_connect "iQOO Z9x 5G"'
 alias iqoo='wifi_connect "iQOO Z7 5G"'
 alias tbpg='wifi_connect "TBPG 1St floor"'
+alias tbpg2='wifi_connect "The Boys PG-F2"'
 alias cmf='wifi_connect "cmf" "piyushraj"'
 # alias hostel='wifi_connect "EduHostelMdu" "Pratyush@123"'
 
 # ============================================================================
 # FUNCTIONS
 # ============================================================================
+ppt2pdf() {
+    local out="../${PWD##*/}_pdf"
+    mkdir -p "$out"
+    libreoffice --headless --convert-to pdf --outdir "$out" *.(ppt|pptx)
+}
 
 # Media download functions
 dv() {
@@ -195,7 +201,7 @@ dv() {
 dp() {
   local quality=${2:-$(read -p "Video quality (or Enter for best): " && echo "$REPLY")}
   yt-dlp -f "bv*[height<=${quality:-10000}]+ba/b" \
-    --cookies ~/Documents/www.youtube.com_cookies.txt \
+    --cookies-from-browser brave \
     --write-auto-sub --embed-subs --embed-thumbnail \
     -o "$HOME/Videos/%(playlist_title)s/%(playlist_index)s-%(title)s.%(ext)s" "$1"
 }
@@ -209,7 +215,7 @@ da() {
 # Utility functions
 timer() { sleep "$1" && dunstify -u critical "Timer completed: $1"; }
 torr() { transmission-cli -u 0 -w "$HOME/Videos/Movies" "$1"; }
-alias gemini='node /home/prem/Downloads/gemini-cli-0.1.7/bundle/gemini.js'
+alias gemini='node /home/prem/Downloads/bin/gemini-cli-0.1.7/bundle/gemini.js'
 y() {
   local tmp="/tmp/yazi-cwd"
   yazi "$@" --cwd-file="$tmp"
@@ -269,3 +275,6 @@ conf() {
 sv() {
   sudo -E nvim $1
 }
+
+alias neet='mpv ~/Videos/"Neetcode 150 Course - All Coding Interview Questions Solved.mp4"'
+alias roaster='viu ~/Documents/gate27/4thSemTimeTable.jpeg'

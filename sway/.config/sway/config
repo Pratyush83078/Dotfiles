@@ -103,7 +103,7 @@ bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 bindsym $mod+Shift+0 move container to workspace number 10
 
-bindsym $mod+w layout toggle tabbed stacking
+bindsym $mod+w layout toggle split tabbed
 bindsym $mod+e layout toggle splitv splith
 
 bindsym $mod+f fullscreen

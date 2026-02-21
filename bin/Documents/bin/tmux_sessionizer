@@ -2,6 +2,7 @@
 
 DIRS=(
     "$HOME/Documents"
+    "$HOME/Downloads/"
     "$HOME/.config"
     "$HOME/Videos/"
     "$HOME/Videos/telegram"

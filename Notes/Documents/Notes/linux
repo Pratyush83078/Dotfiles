@@ -19,6 +19,8 @@ ttyper,smash,typer(go)
 luakit, solaar
 wlrctl , ydtools, wl-kbptr (⚡ ~ ❯ sudo ydotoold -p /run/user/1000/.ydotool_socket -P 0666 &    
 runst,skim,swayimg
+timew (timewarrior)
+
 pacman -Sc --remove all cashed files (-Scc use with caution)
 pacman -Qtdq --list orphaned packages
 pacman -Rns $(pacman -Qtdq)
