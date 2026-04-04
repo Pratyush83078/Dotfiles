@@ -1,5 +1,6 @@
 #font=Meslo LGM Nerd Font
-image=$HOME/.config/sway/wallpapers/beach.jpg
+# image=$HOME/.config/sway/wallpapers/beach.jpg
+image=$HOME/Downloads/lotusDuck.jpg
 font-size=44
 scaling=fill
 
@@ -7,7 +8,8 @@ scaling=fill
 #indicator-y-position=540
 indicator-radius=200
 indicator-thickness=30
-bs-hl-color=ffa066
+
+bs-hl-color=859F44
 caps-lock-bs-hl-color=ffa066
 caps-lock-key-hl-color=957fbb
 
@@ -17,7 +19,8 @@ inside-caps-lock-color=1f1f28
 inside-ver-color=1f1f289a
 inside-wrong-color=1f1f289a
 
-key-hl-color=7fb4ca
+#key-hl-color=7fb4ca
+key-hl-color=DC3A7F
 layout-bg-color=1f1f2839
 layout-border-color=1f1f2833
 layout-text-color=dcd7ba
@@ -26,11 +29,12 @@ line-clear-color=1f1f2889
 line-caps-lock-color=1f1f28
 line-ver-color=1f1f28
 line-wrong-color=1f1f28
-ring-color=1f1f2858
+
+ring-color=556F4656
 ring-clear-color=ffa066
 ring-caps-lock-color=1f1f28
 
-ring-ver-color=#372E25cc
+ring-ver-color=372E25cc
 ring-wrong-color=1f1f28
 separator-color=00000000
 text-color=dcd7ba

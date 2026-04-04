@@ -35,8 +35,17 @@ notes() {
     nvim "/home/prem/Documents/Notes/$file"
   fi
 }
-todo(){
-  nvim "/home/prem/Documents/Notes/todos/$(date +%a).md"
+todo() {
+  f=~/Documents/Notes/todos/$(date +%a).md
+  mkdir -p ~/Documents/Notes/todos
+  echo "\n"
+  mdcat "$f" 2>/dev/null || echo "No todos for today!"
+  read -s -k 1 key
+  if [[ "$key" == $'\n' || "$key" == $'\r' ]]; then
+    nvim "$f"
+  else
+    echo ""
+  fi
 }
 spdf() {
   local select

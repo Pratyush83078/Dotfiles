@@ -1,5 +1,7 @@
-# 6 Nov 25
+# 2 april 26
 
-- [ ] linked list, trees
-- [x] DE practical, assignment
-- [ ] DBMS assignment
+- [ ] dinner
+- [ ] planning routine
+- [ ] priority maxxing
+- [ ] and all things revision
+- [ ] english
