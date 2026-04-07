@@ -129,7 +129,7 @@ ffc() {
     --preview-window=right:50%) || return
   [ -d "$selected" ] && cd "$selected" || xdg-open "$selected"
 }
-conf() {
+sconf() {
   local selected
   selected=$(fd . ~/.config --type file \
     --exclude={VSCodium,thorium,pdfcpu,transmission,content_shell,Thorium,Electron,\
